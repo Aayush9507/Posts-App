@@ -33,9 +33,11 @@ app.post("/api/posts", (req, res, next) => {
     content: req.body.content
   });
   // Saving our Post in MongoDB
-  post.save();
-  res.status(201).json({
-    message:'post added bro'
+  post.save().then(result => {
+    res.status(201).json({
+      message:'post added bro',
+      postId: result._id
+    });
   });
 });
 
